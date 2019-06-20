@@ -34,4 +34,15 @@ public class ClaseTest {
         Assert.assertTrue(appointmentPage.textDisplayedAfterLogin());
     }
 
+    @Test
+    public void setAppointment () {
+        logInPage = homePage.clickAppointmentButton();
+        Assert.assertTrue(logInPage.verifyIsLoginPage());
+        appointmentPage = logInPage.logInSuccess(usuario, password);
+        Assert.assertTrue(appointmentPage.textDisplayedAfterLogin());
+        confirmationPage = appointmentPage.addApointent("12/04/2020", "hello", "Medicare",
+                            "Tokyo CURA Healthcare Center");
+        Assert.assertTrue(confirmationPage.titleIsDisplayed());
+
+    }
     }

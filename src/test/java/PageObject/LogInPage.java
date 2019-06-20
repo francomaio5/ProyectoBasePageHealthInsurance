@@ -19,6 +19,7 @@ public class LogInPage extends BasePage {
     @FindBy(xpath = "//h2[contains(text(), 'Login')]")
     WebElement loginTitle;
 
+
     public LogInPage(WebDriver driver) {
         super(driver);
     }
@@ -33,4 +34,5 @@ public class LogInPage extends BasePage {
     public boolean verifyIsLoginPage() {
         return loginTitle.isDisplayed();
     }
+
 }

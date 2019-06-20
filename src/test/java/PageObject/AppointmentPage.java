@@ -39,8 +39,9 @@ public class AppointmentPage extends BasePage {
         return driver.findElement(By.tagName("h2")).getText().contains("Make Appointment");
     }
 
-    public void addApointent(String date, String hospital, String comment, String program, String comboFacility) {
-        Select combo = new Select(inputFacility);
+    public ConfirmationPage addApointent(String date, String comment, String program, String comboFacility) {
+
+    Select combo = new Select(inputFacility);
         combo.selectByValue(comboFacility);
         if (program.equals("Medicare")) {
             radioMedicareButton.click();
@@ -53,6 +54,8 @@ public class AppointmentPage extends BasePage {
         visitDate.sendKeys(date);
         comenText.sendKeys(comment);
         appointmentButton.click();
+
+        return new ConfirmationPage(driver);
 
           }
 }
