@@ -40,8 +40,32 @@ public class ConfirmationPage extends BasePage {
         return title.isDisplayed();
     }
 
-    public boolean titleText(){
+    public boolean titleContain(){
         return title.getText().contains("Appointment Confirmation");
     }
+
+    public boolean facilityContain(String texto){
+        return FacilityConfirm.getText().contains(texto);
+    }
+
+    public boolean hospitalContain(boolean valor){
+        if(valor)
+            return HospitalReadminConfirm.getText().contains("Yes");
+        else return HospitalReadminConfirm.getText().contains("No");
+    }
+
+    public boolean commentContain(String comment){
+        return Comment.getText().contains(comment);
+    }
+
+    public boolean healthcareProgram(String medicaid) {
+        return Program.getText().contains(medicaid);
+    }
+
+    public boolean verifyDate(String fecha) {
+        return VisitDate.getText().contains(fecha);
+
+    }
+
 }
 

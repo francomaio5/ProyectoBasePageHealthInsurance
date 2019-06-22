@@ -19,6 +19,8 @@ public class LogInPage extends BasePage {
     @FindBy(xpath = "//h2[contains(text(), 'Login')]")
     WebElement loginTitle;
 
+    @FindBy(className = "text-danger")
+    WebElement loginFailed;
 
     public LogInPage(WebDriver driver) {
         super(driver);
@@ -33,6 +35,10 @@ public class LogInPage extends BasePage {
 
     public boolean verifyIsLoginPage() {
         return loginTitle.isDisplayed();
+    }
+
+    public boolean loginFailed() {
+        return loginFailed.isDisplayed();
     }
 
 }

@@ -39,10 +39,15 @@ public class AppointmentPage extends BasePage {
         return driver.findElement(By.tagName("h2")).getText().contains("Make Appointment");
     }
 
-    public ConfirmationPage addApointent(String date, String comment, String program, String comboFacility) {
+    public ConfirmationPage addApointent(boolean applyHospital, String date, String comment, String program, String comboFacility) {
 
-    Select combo = new Select(inputFacility);
+        Select combo = new Select(inputFacility);
         combo.selectByValue(comboFacility);
+
+        if (applyHospital)
+            hospitalReadmission.click();
+
+
         if (program.equals("Medicare")) {
             radioMedicareButton.click();
         } else if (program.equals("Medicaid")) {
@@ -59,6 +64,16 @@ public class AppointmentPage extends BasePage {
 
           }
 }
+
+
+
+
+
+
+
+
+
+
 
 /*
 Crear FindBy para cada uno de los 3 radio butons y despues en el metodo un else if

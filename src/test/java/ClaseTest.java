@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class ClaseTest {
@@ -15,8 +16,8 @@ public class ClaseTest {
     LogInPage logInPage;
     AppointmentPage appointmentPage;
     ConfirmationPage confirmationPage;
-    String usuario = "John Doe";
-    String password = "ThisIsNotAPassword";
+    //String usuario = "John Doe";
+    //String password = "ThisIsNotAPassword";
 
     @BeforeClass
     public void setUp (){
@@ -27,22 +28,32 @@ public class ClaseTest {
     }
 
     @Test
-    public void login() {
+    @Parameters({"usuario","password"})
+    public void login(String usuario, String password) {
         logInPage = homePage.clickAppointmentButton();
         Assert.assertTrue(logInPage.verifyIsLoginPage());
         appointmentPage = logInPage.logInSuccess(usuario, password);
         Assert.assertTrue(appointmentPage.textDisplayedAfterLogin());
     }
 
-    @Test
+    @Test(dataProvider = "badLogin", dataProviderClass = badLogin.class)
+    public void badLogin(String usuario, String password) {
+        logInPage = homePage.clickAppointmentButton();
+        Assert.assertTrue(logInPage.verifyIsLoginPage());
+        appointmentPage = logInPage.logInSuccess(usuario, password);
+        Assert.assertTrue(logInPage.loginFailed());
+        driver.quit();
+    }
+
+   /* @Test
     public void setAppointment () {
         logInPage = homePage.clickAppointmentButton();
         Assert.assertTrue(logInPage.verifyIsLoginPage());
         appointmentPage = logInPage.logInSuccess(usuario, password);
         Assert.assertTrue(appointmentPage.textDisplayedAfterLogin());
-        confirmationPage = appointmentPage.addApointent("12/04/2020", "hello", "Medicare",
+        confirmationPage = appointmentPage.addApointent(true, "12/04/2020", "hello", "Medicare",
                             "Tokyo CURA Healthcare Center");
         Assert.assertTrue(confirmationPage.titleIsDisplayed());
 
-    }
+    }*/
     }
